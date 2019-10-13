@@ -8,45 +8,65 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'pesquisa',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+              import('../pesquisa/pesquisa.module').then(m => m.PesquisaPageModule)
           }
         ]
       },
       {
-        path: 'tab2',
+        path: 'destaques',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+              import('../destaques/destaques.module').then(m => m.DestaquesPageModule)
           }
         ]
       },
       {
-        path: 'tab3',
+        path: 'home',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+              import('../home/home.module').then(m => m.HomePageModule)
+          }
+        ]
+      },
+      {
+        path: 'inscricoes',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../inscricoes/inscricoes.module').then(m => m.InscricoesPageModule)
+          }
+        ]
+      },
+      {
+        path: 'opcoes',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../opcoes/opcoes.module').then(m => m.OpcoesPageModule)
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/home',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   }
 ];
