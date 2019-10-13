@@ -1,9 +1,68 @@
+<style>
+  :root {
+    --ion-safe-area-top: 20px;
+    --ion-safe-area-bottom: 22px;
+  }
+
+  ion-button {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+</style>
+
 <ion-header>
   <ion-toolbar>
-    <ion-title>pesquisa</ion-title>
+    <ion-title>Encontre ações</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-item>
+    <ion-label position="floating">Por nome</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Por cidade</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+
+  &nbsp;
+
+  <ion-item>
+    <ion-label>Por categoria</ion-label>
+    <ion-select interface="popover">
+      <ion-select-option value="nes">NES</ion-select-option>
+      <ion-select-option value="n64">Nintendo64</ion-select-option>
+      <ion-select-option value="ps">PlayStation</ion-select-option>
+      <ion-select-option value="genesis">Sega Genesis</ion-select-option>
+      <ion-select-option value="saturn">Sega Saturn</ion-select-option>
+      <ion-select-option value="snes">SNES</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  &nbsp;
+
+  <ion-item>
+    <ion-label>Por data</ion-label>
+    <ion-datetime displayFormat="DD MM YY" placeholder="Selecione"></ion-datetime>
+  </ion-item>
+
+  &nbsp;
+
+  <ion-item>
+    <ion-label>Visitantes</ion-label>
+    <ion-checkbox color="primary" slot="start"></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-checkbox color="primary" slot="start"></ion-checkbox>
+    <ion-label>Voluntários</ion-label>
+  </ion-item>
+
+  &nbsp;
+
+  <ion-button expand="block">Pesquisar</ion-button>
 
 </ion-content>

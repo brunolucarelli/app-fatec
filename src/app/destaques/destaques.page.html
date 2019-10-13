@@ -1,9 +1,103 @@
+<style>
+  div {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 22px;
+  }
+
+  .actionLocale {
+    font-size: 12px;
+    color: gray;
+    text-align: left;
+  }
+
+  .actionDate {
+    font-size: 12px;
+    color: gray;
+    text-align: right;
+  }
+</style>
+
 <ion-header>
   <ion-toolbar>
-    <ion-title>destaques</ion-title>
+    <ion-title>Destaques</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-list>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nome da ação</ion-card-title>
+      </ion-card-header>
+      <img src="assets/images/slide-1.png" height="100px" />
+      <ion-card-content>
+        Keep close to Nature's heart... and break clear away, once in awhile...
+      </ion-card-content>
+      <ion-card-content>
+        <table style="width:100%; margin-top:-20px;">
+          <tr>
+            <th>
+              <p class="actionLocale">Local</p>
+            </th>
+            <th>
+              <p class="actionDate">01/01/2019</p>
+            </th>
+          </tr>
+        </table>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nome da ação</ion-card-title>
+      </ion-card-header>
+      <img src="assets/images/slide-1.png" height="100px" />
+      <ion-card-content>
+        Keep close to Nature's heart... and break clear away, once in awhile...
+      </ion-card-content>
+      <ion-card-content>
+        <table style="width:100%; margin-top:-20px;">
+          <tr>
+            <th>
+              <p class="actionLocale">Local</p>
+            </th>
+            <th>
+              <p class="actionDate">01/01/2019</p>
+            </th>
+          </tr>
+        </table>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nome da ação</ion-card-title>
+      </ion-card-header>
+      <img src="assets/images/slide-1.png" height="100px" />
+      <ion-card-content>
+        Keep close to Nature's heart... and break clear away, once in awhile...
+      </ion-card-content>
+      <ion-card-content>
+        <table style="width:100%; margin-top:-20px;">
+          <tr>
+            <th>
+              <p class="actionLocale">Local</p>
+            </th>
+            <th>
+              <p class="actionDate">01/01/2019</p>
+            </th>
+          </tr>
+        </table>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
