@@ -12,4 +12,10 @@ export class OpcoesPage implements OnInit {
   ngOnInit() {
   }
 
+  public disabled = false;
+
+  public change() {
+    this.disabled = !this.disabled;
+  }
+
 }

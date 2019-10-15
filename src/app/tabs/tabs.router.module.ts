@@ -58,6 +58,26 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'minhasacoes',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../opcoes/minhasacoes/minhasacoes.module').then(m => m.MinhasacoesPageModule)
+          }
+        ]
+      },
+      {
+        path: 'meuperfil',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../opcoes/meuperfil/meuperfil.module').then(m => m.MeuperfilPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
@@ -75,4 +95,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

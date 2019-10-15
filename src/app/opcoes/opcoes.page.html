@@ -2,8 +2,18 @@
   <ion-toolbar>
     <ion-title>Opções</ion-title>
   </ion-toolbar>
+  <style>
+  ion-button {
+    width: 100%;
+  }
+  </style>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+  <ion-button routerLink="/tabs/meuperfil" routerDirection="forward">Meu perfil</ion-button>
+  <ion-button routerLink="/tabs/minhasacoes" routerDirection="forward">Minhas ações</ion-button>
+  <ion-button disabled="disabled">Avaliar o aplicativo</ion-button>
+  <ion-button disabled="disabled">Doar</ion-button>
+  <ion-button disabled="disabled">Ajuda</ion-button>
+  <ion-button disabled="disabled">Sair</ion-button>
 </ion-content>
