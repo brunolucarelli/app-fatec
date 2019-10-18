@@ -78,6 +78,26 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'login',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../login/login.module').then(m => m.LoginPageModule)
+          }
+        ]
+      },
+      {
+        path: 'cadastro',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../cadastro/cadastro.module').then(m => m.CadastroPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
