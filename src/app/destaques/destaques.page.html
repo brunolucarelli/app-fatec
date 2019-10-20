@@ -20,6 +20,19 @@
 
 <ion-content padding>
 
+    <ion-card
+    *ngFor="let action of actionList | async"
+    routerLink="/acao/{{action.id}}"
+  >
+    <ion-card-header>
+      {{ action.actionTitle }}
+    </ion-card-header>
+    <ion-card-content>
+      Descrição: {{ action.actionDescription }}
+    </ion-card-content>
+  </ion-card>
+
+  <!--
   <ion-list>
     <ion-card>
       <ion-card-header>
@@ -93,4 +106,5 @@
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+  -->
 </ion-content>

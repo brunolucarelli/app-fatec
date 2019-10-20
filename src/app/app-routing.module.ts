@@ -14,7 +14,9 @@ const routes: Routes = [
   { path: 'onboarding', loadChildren: './onboarding/onboarding.module#OnboardingPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroPageModule' },
-  { path: 'onboarding', loadChildren: './onboarding/onboarding.module#OnboardingPageModule' }
+  { path: 'onboarding', loadChildren: './onboarding/onboarding.module#OnboardingPageModule' },
+  { path: 'criaracao', loadChildren: './opcoes/minhasacoes/criaracao/criaracao.module#CriaracaoPageModule' },
+  { path: 'acao/:id', loadChildren: './acao/acao.module#AcaoPageModule' }
 ];
 @NgModule({
   imports: [
