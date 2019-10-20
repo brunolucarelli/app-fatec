@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'meuperfil', loadChildren: './opcoes/meuperfil/meuperfil.module#MeuperfilPageModule' },
   { path: 'onboarding', loadChildren: './onboarding/onboarding.module#OnboardingPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroPageModule' }
+  { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroPageModule' },
+  { path: 'onboarding', loadChildren: './onboarding/onboarding.module#OnboardingPageModule' }
 ];
 @NgModule({
   imports: [
