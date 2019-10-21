@@ -3,7 +3,7 @@ import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth'
 
-import {IonSlides} from '@ionic/angular';
+import { IonSlides } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -14,7 +14,7 @@ import { ToastController } from '@ionic/angular';
 
 export class OnboardingPage {
 
-  @ViewChild('slides', { static:true }) slides: IonSlides;
+  @ViewChild('slides', { static: true }) slides: IonSlides;
 
   useremail: string = ""
   userpassword: string = ""
@@ -25,7 +25,7 @@ export class OnboardingPage {
     private storage: Storage,
     private router: Router,
     public toastController: ToastController
-    ) {}
+  ) { }
 
   async finish() {
     await this.storage.set('onboardingComplete', true);
@@ -39,18 +39,18 @@ export class OnboardingPage {
       this.presentToast('Conta criada.');
       this.slides.lockSwipeToNext(false)
       this.slides.slideTo(2, 500);
-    } catch(error) {
-      if(error.code == 'auth/email-already-in-use'){
+    } catch (error) {
+      if (error.code == 'auth/email-already-in-use') {
         this.presentToast('Este e-mail já está em uso.')
-      } else if(error.code == 'auth/weak-password'){
+      } else if (error.code == 'auth/weak-password') {
         this.presentToast('Senha fraca.')
       }
       console.dir(error)
     }
-    
+
   }
 
-  async presentToast(msg:any) {
+  async presentToast(msg: any) {
     const toast = await this.toastController.create({
       message: msg,
       duration: 3000
@@ -60,25 +60,26 @@ export class OnboardingPage {
 
   onSlideChanged() {
     this.slides.getActiveIndex().then(
-      (index)=>{
+      (index) => {
         let currentIndex = index;
         console.log(currentIndex)
-        if(currentIndex == 0){
+        if (currentIndex == 0) {
           this.slides.lockSwipeToNext(false)
         }
-        if(currentIndex == 1){
+        if (currentIndex == 1) {
           this.slides.lockSwipeToNext(true)
         }
-        if(currentIndex == 2){
+        if (currentIndex == 2) {
           this.slides.lockSwipeToNext(false)
         }
-        if(currentIndex == 3){
+        if (currentIndex == 3) {
           this.slides.lockSwipeToNext(false)
         }
-     });
+      });
   }
 
-  goToLogin() {
+  async goToLogin() {
+    await this.storage.set('onboardingComplete', true);
     this.router.navigateByUrl('/login');
   }
 

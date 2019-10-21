@@ -1,67 +1,74 @@
 <ion-header>
-    <ion-toolbar>
+  <!--<ion-toolbar>
       <ion-title>Onboarding</ion-title>
-    </ion-toolbar>
-    <style>
-      .swiper-slide {
-        display: block;
-      }
-  
-      ion-slide>h2 {
-        margin-top: 2.8rem;
-      }
-  
-      ion-slide>img {
-        max-height: 50%;
-        max-width: 60%;
-        margin: 36px 0;
-      }
-      </style>
-  </ion-header>
-  
-  <ion-content padding>
-  
-    <ion-slides pager="true" #slides (ionSlideDidChange)="onSlideChanged($event)" [options]="sliderOptions">
-  
-        <ion-slide>
-          <img src="assets/images//slide-1.png" />
-          <h2>Welcome to the <b>ICA</b></h2>
-          <p>The <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a demonstration
-            of
-            proper code use.</p>
-        </ion-slide>
-  
-        <ion-slide>
-          <ion-list>
-            <ion-item>
-              <ion-label position="floating">E-mail</ion-label>
-              <ion-input type="text" [(ngModel)]="useremail"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Senha</ion-label>
-              <ion-input type="password" [(ngModel)]="userpassword"></ion-input>
-            </ion-item>
-          </ion-list>
-          <ion-button expand="block" (click)="register()">Cadastrar</ion-button>
-          <ion-button fill="clear" (click)="goToLogin()">Já tenho cadastro <ion-icon slot="end" name="arrow-forward">
-            </ion-icon>
-          </ion-button>
-        </ion-slide>
-  
-        <ion-slide>
-          <img src="assets/images/slide-3.png" />
-          <h2>What is Ionic Pro?</h2>
-          <p><b>Ionic Pro</b> is a powerful set of services and features built on top of Ionic Framework that brings a
-            totally new level of app development agility to mobile dev teams.</p>
-        </ion-slide>
-  
-        <ion-slide>
-          <img src="assets/images//slide-4.png" />
-          <h2>Ready to Play?</h2>
-          <ion-button fill="clear" (click)="finish()">Começar <ion-icon slot="end" name="arrow-forward"></ion-icon>
-          </ion-button>
-        </ion-slide>
-  
-    </ion-slides>
-  
-  </ion-content>
+    </ion-toolbar>-->
+  <style>
+    .swiper-slide {
+      display: block;
+    }
+
+    ion-slide>h2 {
+      margin-top: 2.8rem;
+    }
+
+    ion-slide>img {
+      max-height: 50%;
+      max-width: 60%;
+      margin: 36px 0;
+    }
+  </style>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-slides class="left-text" pager="true" #slides (ionSlideDidChange)="onSlideChanged($event)"
+    [options]="sliderOptions">
+
+    <ion-slide>
+      <!--<img src="assets/images//slide-1.png" />-->
+      <h2>Bem-vindo(a) ao <b>WeHelp!</b></h2>
+      <p>Aqui você encontrará <b>ações comunitárias</b> e poderá participar como visitante ou voluntário.</p>
+      <p>Vamos ajudar a comunidade juntos?</p>
+    </ion-slide>
+
+    <ion-slide>
+      <h2>Mas antes de começarmos</h2>
+      <p>Precisamos de algumas informações para criar a sua conta.</p>
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">E-mail</ion-label>
+          <ion-input type="text" [(ngModel)]="useremail"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input type="password" [(ngModel)]="userpassword"></ion-input>
+        </ion-item>
+      </ion-list>
+      <div class="center-text">
+        <ion-button expand="block" (click)="register()">Criar conta</ion-button>
+        <ion-button fill="clear" (click)="goToLogin()">Já tenho cadastro <ion-icon slot="end" name="arrow-forward">
+          </ion-icon>
+        </ion-button>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <!--<img src="assets/images/slide-3.png" />-->
+      <h2>Obrigado!</h2>
+      <p><b>Busque por ações</b> do seu interesse quando e onde quiser e comece a ajudar!</p>
+      <p>Na área de destaques iremos sugerir algumas ações próximas da sua localidade.</p>
+    </ion-slide>
+
+    <ion-slide>
+      <!--<img src="assets/images//slide-4.png" />-->
+      <h2>Contamos com você</h2>
+      <p>Ajude na divulgação, <b>curta e compartilhe</b> nas redes sociais!</p>
+      <p>Você também pode criar a sua própria ação comunitária!</p>
+      <div class="center-text">
+      <ion-button expand="block" (click)="finish()">Começar</ion-button>
+    </div>
+    </ion-slide>
+
+  </ion-slides>
+
+</ion-content>

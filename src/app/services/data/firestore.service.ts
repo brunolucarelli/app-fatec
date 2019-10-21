@@ -11,8 +11,9 @@ export class FirestoreService {
 
   createAction(
     actionTitle: string,
-    actionDescription: string
-  ): Promise<void> { 
+    actionDescription: string,
+  ): Promise<void> {
+
     const id = this.firestore.createId();
 
     return this.firestore.doc('actionList/${id}').set({
