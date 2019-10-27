@@ -11,6 +11,8 @@ import { Observable } from 'rxjs';
 })
 export class AcaoPage implements OnInit {
 
+  viewImage: string
+
   public action: Observable<Action>;
 
   constructor(
@@ -21,6 +23,7 @@ export class AcaoPage implements OnInit {
   ngOnInit() {
     const actionId: string = this.route.snapshot.paramMap.get('id');
     this.action = this.firestoreService.getActionDetail(actionId).valueChanges();
+
   }
 
 }

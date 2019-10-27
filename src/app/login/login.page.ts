@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth'
 import { auth } from 'firebase/app'
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+//import { UserService } from 'src/app/services/data/user.service';
 
 @Component({
   selector: 'app-login',
@@ -11,23 +12,30 @@ import { ToastController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  useremail: string = ""
+  usermail: string = ""
   userpassword: string = ""
 
   constructor(
     public afAuth: AngularFireAuth,
     private router: Router,
     public toastController: ToastController
+    //public user: UserService
     ) { }
 
   ngOnInit() {
   }
 
   async login() {
-    const { useremail, userpassword } = this
+    const { usermail, userpassword } = this
     try {
-      const res = await this.afAuth.auth.signInWithEmailAndPassword(useremail, userpassword)
-      this.router.navigateByUrl('/');
+      const res = await this.afAuth.auth.signInWithEmailAndPassword(usermail, userpassword)
+      /*if(res.user) {
+        this.user.setUser({
+          usermail,
+          uid: res.user.uid
+        })
+        this.router.navigateByUrl('/');
+      }*/this.router.navigateByUrl('/');
     } catch(err) {
       if(err.code == 'auth/user-not-found' || err.code == 'auth/wrong-password'){
         this.presentToast('E-mail ou senha inválidos.')

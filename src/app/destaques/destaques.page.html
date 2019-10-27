@@ -20,11 +20,9 @@
 
 <ion-content padding>
 
-    <ion-card
-    *ngFor="let action of actionList | async"
-    routerLink="/acao/{{action.id}}"
-  >
+  <ion-card *ngFor="let action of actionList | async" routerLink="/acao/{{action.id}}">
     <ion-card-header>
+      <ion-img src="{{ action.actionImage }}"></ion-img>
       {{ action.actionTitle }}
     </ion-card-header>
     <ion-card-content>

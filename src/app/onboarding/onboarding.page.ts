@@ -6,6 +6,9 @@ import { AngularFireAuth } from '@angular/fire/auth'
 import { IonSlides } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 
+//import { UserService } from 'src/app/services/data/user.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 @Component({
   selector: 'app-onboarding',
   templateUrl: './onboarding.page.html',
@@ -16,7 +19,7 @@ export class OnboardingPage {
 
   @ViewChild('slides', { static: true }) slides: IonSlides;
 
-  useremail: string = ""
+  usermail: string = ""
   userpassword: string = ""
   slideNumber: any
 
@@ -24,7 +27,9 @@ export class OnboardingPage {
     public afAuth: AngularFireAuth,
     private storage: Storage,
     private router: Router,
-    public toastController: ToastController
+    public toastController: ToastController,
+    //public user: UserService,
+    public afstore: AngularFirestore
   ) { }
 
   async finish() {
@@ -33,9 +38,12 @@ export class OnboardingPage {
   }
 
   async register() {
-    const { useremail, userpassword } = this
+    const { usermail, userpassword } = this
     try {
-      const res = await this.afAuth.auth.createUserWithEmailAndPassword(useremail, userpassword)
+      const res = await this.afAuth.auth.createUserWithEmailAndPassword(usermail, userpassword)
+      /*this.afstore.doc('users/${res.user.uid}').set({
+				usermail
+			})*/
       this.presentToast('Conta criada.');
       this.slides.lockSwipeToNext(false)
       this.slides.slideTo(2, 500);

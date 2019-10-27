@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth'
 import { auth } from 'firebase/app'
 import { Router } from '@angular/router';
-
+//import { UserService } from 'src/app/services/data/user.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -12,22 +13,27 @@ import { ToastController } from '@ionic/angular';
 })
 export class CadastroPage implements OnInit {
 
-  useremail: string = ""
+  usermail: string = ""
   userpassword: string = ""
 
   constructor(
     public afAuth: AngularFireAuth,
     private router: Router,
-    public toastController: ToastController
+    public toastController: ToastController,
+    //public user: UserService,
+    public afstore: AngularFirestore
     ) { }
 
   ngOnInit() {
   }
 
   async register() {
-    const { useremail, userpassword } = this
+    const { usermail, userpassword } = this
     try {
-      const res = await this.afAuth.auth.createUserWithEmailAndPassword(useremail, userpassword)
+      const res = await this.afAuth.auth.createUserWithEmailAndPassword(usermail, userpassword)
+      /*this.afstore.doc('users/${res.user.uid}').set({
+				usermail
+			})*/
       this.presentToast('Conta criada.');
       this.router.navigateByUrl('/');
     } catch(error) {

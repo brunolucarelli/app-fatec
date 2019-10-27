@@ -17,6 +17,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AngularFireStorageModule } from '@angular/fire/storage'
 import { AngularFireAuthModule } from '@angular/fire/auth'
 
+import { Camera } from '@ionic-native/camera/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { Crop } from '@ionic-native/crop/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -33,7 +37,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth'
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Camera,
+    ImagePicker,
+    Crop
   ],
   bootstrap: [AppComponent]
 })

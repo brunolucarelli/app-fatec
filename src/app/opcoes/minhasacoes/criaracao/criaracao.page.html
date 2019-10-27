@@ -8,11 +8,6 @@
 </ion-header>
 
 <ion-content padding>
-  <!--<div class="box">
-        <div class="preview">
-          <img [src]="url" alt="">
-        </div>
-      -->
   <form [formGroup]="createActionForm" (submit)="createAction()">
     <ion-item>
       <ion-label position="floating">Título</ion-label>
@@ -24,28 +19,15 @@
       <ion-input type="text" formControlName="actionDescription"></ion-input>
     </ion-item>
 
-    <!--<ion-button (click)="takePicture()">
-      <ion-icon slot="icon-only" name="camera"></ion-icon>
-    </ion-button>
-    <span *ngIf="guestPicture">Foto tirada!</span>-->
+    <ion-item>
+      <label>
+        <!--<input formControlName="actionImage" (change)="uploadImage($event)" type="file" accept="image/*">-->
+        <input formControlName="actionImage" type="file" (change)="setImageAction($event)"  accept="image/*">
+      </label>
+    </ion-item>
+
     <ion-button expand="block" type="submit" [disabled]="!createActionForm.valid">
       Salvar
     </ion-button>
   </form>
-
-
-  <!-- <ion-list>
-    <ion-item>
-      <ion-label position="floating">Nome</ion-label>
-      <ion-input type="text" [(ngModel)]="acaonome"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Descricao</ion-label>
-      <ion-input type="password" [(ngModel)]="acaodescricao"></ion-input>
-    </ion-item>
-  </ion-list>
-  <div text-center>
-    <ion-button expand="block" (click)="save()">Salvar</ion-button>
-    <input (change)="uploadImage($event)" type="file" class="image-upload" accept="image/*">
-  </div>-->
 </ion-content>

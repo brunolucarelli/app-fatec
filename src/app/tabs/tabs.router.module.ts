@@ -98,6 +98,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'sobre',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../opcoes/sobre/sobre.module').then(m => m.SobrePageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
