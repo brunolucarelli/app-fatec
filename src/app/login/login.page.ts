@@ -1,54 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth'
-import { auth } from 'firebase/app'
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { LoadingController, AlertController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/user/auth.service';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
-//import { UserService } from 'src/app/services/data/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  styleUrls: ['./login.page.scss']
 })
 export class LoginPage implements OnInit {
 
-  usermail: string = ""
-  userpassword: string = ""
-
+  public loginForm: FormGroup;
+  public loading: HTMLIonLoadingElement;
   constructor(
-    public afAuth: AngularFireAuth,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
+    private authService: AuthService,
     private router: Router,
-    public toastController: ToastController
-    //public user: UserService
-    ) { }
-
-  ngOnInit() {
+    private formBuilder: FormBuilder
+  ) {
+    this.loginForm = this.formBuilder.group({
+      email: ['',
+        Validators.compose([Validators.required, Validators.email])],
+      password: [
+        '',
+        Validators.compose([Validators.required, Validators.minLength(6)]),
+      ],
+    });
   }
 
-  async login() {
-    const { usermail, userpassword } = this
-    try {
-      const res = await this.afAuth.auth.signInWithEmailAndPassword(usermail, userpassword)
-      /*if(res.user) {
-        this.user.setUser({
-          usermail,
-          uid: res.user.uid
-        })
-        this.router.navigateByUrl('/');
-      }*/this.router.navigateByUrl('/');
-    } catch(err) {
-      if(err.code == 'auth/user-not-found' || err.code == 'auth/wrong-password'){
-        this.presentToast('E-mail ou senha inválidos.')
-      }
-      console.log(err)
+  async loginUser(loginForm: FormGroup): Promise<void> {
+    if (!loginForm.valid) {
+      console.log('Form is not valid yet, current value:', loginForm.value);
+    } else {
+      this.loading = await this.loadingCtrl.create();
+      await this.loading.present();
+
+      const email = loginForm.value.email;
+      const password = loginForm.value.password;
+
+      this.authService.loginUser(email, password).then(
+        () => {
+          this.loading.dismiss().then(() => {
+            this.router.navigateByUrl('/tabs/home');
+          });
+        },
+        error => {
+          this.loading.dismiss().then(async () => {
+            const alert = await this.alertCtrl.create({
+              message: error.message,
+              buttons: [{ text: 'Ok', role: 'cancel' }],
+            });
+            await alert.present();
+          });
+        }
+      );
     }
   }
 
-  async presentToast(msg:any) {
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 3000
-    });
-    toast.present();
-  }
+  ngOnInit() { }
 }
