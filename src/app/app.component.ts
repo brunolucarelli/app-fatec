@@ -28,6 +28,7 @@ export class AppComponent {
       appId: "1:577367453031:web:4a50d014e1124692e253c2",
       measurementId: "G-HX0TXB0VBC"
     });
+    var db = firebase.firestore();
   }
 
   initializeApp() {

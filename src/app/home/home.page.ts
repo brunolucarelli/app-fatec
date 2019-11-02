@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase/app';
 import { PerfilService } from 'src/app/services/user/perfil.service';
+
+import * as firebase from 'firebase/app';
+import 'firebase/storage';
+
 
 @Component({
   selector: 'app-home',
@@ -9,30 +12,24 @@ import { PerfilService } from 'src/app/services/user/perfil.service';
 })
 export class HomePage implements OnInit {
 
+  id: any;
   public userProfile: any;
   public firstname: any;
-  id: any;
 
   constructor(
-    private profileService: PerfilService
+    private profileService: PerfilService,
   ) {
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.id = user.uid;
-        //this.name = user.name;
         console.log('User is signed in');
-        console.log(this.id);
+        //console.log(this.id);
       }
       else {
-        // No user is signed in.
         console.log('User is NOT signed in');
       }
     });
-  }
-
-  userName() {
-
   }
 
   ngOnInit() {
@@ -45,6 +42,37 @@ export class HomePage implements OnInit {
         let names = fullname.split(" ");
         let firstname = names[0];
         this.firstname = firstname;
+      });
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.id = user.uid;
+        console.log(this.id);
+        this.getParticipation(this.id);
+      }
+    })
+  }
+
+  getParticipation(userId: any) {
+    var db = firebase.firestore();
+    var participationList = db.collection('participationList')
+      .where("userId", "==", userId)
+      .get()
+      .then(function (querySnapshot) {
+        /*
+                querySnapshot.forEach(function(doc) {
+              // doc.data() is never undefined for query doc snapshots
+              console.log(doc.id, " => ", doc.data());
+          });
+      })
+      .catch(function(error) {
+          console.log("Error getting documents: ", error);
+      });
+        */
+        if (querySnapshot.empty) {
+          console.log("Não existe");
+        } else {
+          console.log("Existe");
+        }
       });
   }
 }
