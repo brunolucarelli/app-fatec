@@ -11,4 +11,15 @@
   <h3>Descrição</h3>
   <p>{{ (action | async)?.actionDescription }}</p>
   <ion-img src="{{ (action | async)?.actionImage }}"></ion-img>
+
+  <ion-card routerLink="/perfil/{{ (action | async)?.actionUserID }}">
+    <ion-card-header>
+        {{ (action | async)?.actionUserName }}
+    </ion-card-header>
+  </ion-card>
+
+  <ion-button expand="block" (click)="participate()">
+    Participar
+  </ion-button>
+
 </ion-content>

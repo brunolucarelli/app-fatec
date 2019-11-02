@@ -19,7 +19,9 @@ const routes: Routes = [
   { path: 'criaracao', loadChildren: './opcoes/minhasacoes/criaracao/criaracao.module#CriaracaoPageModule', canActivate: [AuthGuard] },
   { path: 'acao/:id', loadChildren: './acao/acao.module#AcaoPageModule', canActivate: [AuthGuard] },
   { path: 'sobre', loadChildren: './opcoes/sobre/sobre.module#SobrePageModule', canActivate: [AuthGuard] },
-  { path: 'resetarsenha', loadChildren: './resetarsenha/resetarsenha.module#ResetarsenhaPageModule' }
+  { path: 'resetarsenha', loadChildren: './resetarsenha/resetarsenha.module#ResetarsenhaPageModule' },
+  { path: 'perfil/:id', loadChildren: './perfil/perfil.module#PerfilPageModule' },
+
 ];
 @NgModule({
   imports: [

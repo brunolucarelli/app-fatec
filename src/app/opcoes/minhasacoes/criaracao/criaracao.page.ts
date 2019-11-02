@@ -8,6 +8,9 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { AlertController, LoadingController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/services/data/firestore.service';
 
+import * as firebase from 'firebase/app';
+import { PerfilService } from 'src/app/services/user/perfil.service';
+
 import { Router } from '@angular/router';
 
 export interface Image {
@@ -21,7 +24,7 @@ export interface Image {
   styleUrls: ['./criaracao.page.scss'],
 })
 
-export class CriaracaoPage {
+export class CriaracaoPage implements OnInit {
 
   imageAction: any
   imageActionURL: any
@@ -29,7 +32,12 @@ export class CriaracaoPage {
   newImage: Image = {
     id: this.afs.createId(), image: ''
   }
-  loading: boolean = false;;
+  loading: boolean = false;
+
+  actionUserID: any;
+  actionUserName: string;
+
+  public userProfile: any;
 
   public createActionForm: FormGroup;
 
@@ -40,13 +48,29 @@ export class CriaracaoPage {
     formBuilder: FormBuilder,
     private router: Router,
     private afs: AngularFirestore,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private profileService: PerfilService
   ) {
     this.createActionForm = formBuilder.group({
       actionTitle: ['', Validators.required],
       actionDescription: ['', Validators.required],
       actionImage: ['', Validators.required]
     });
+    firebase.auth().onAuthStateChanged((user) =>
+      {
+        if (user)
+        {
+          this.actionUserID = user.uid;
+          //this.name = user.name;
+          console.log('User is signed in');
+          console.log(this.actionUserID);
+        }
+        else
+        {
+          // No user is signed in.
+          console.log('User is NOT signed in');
+        }
+      });
   }
 
   setImageAction(event) {
@@ -73,8 +97,9 @@ export class CriaracaoPage {
         const actionTitle = this.createActionForm.value.actionTitle;
         const actionDescription = this.createActionForm.value.actionDescription;
         const actionImage = this.imageActionURL;
+
         this.firestoreService
-          .createAction(actionTitle, actionDescription, actionImage)
+          .createAction(actionTitle, actionDescription, actionImage, this.actionUserID, this.actionUserName)
           .then(
             () => {
               loading.dismiss().then(() => {
@@ -103,6 +128,16 @@ export class CriaracaoPage {
       task: this.storage.upload(filePath, file)
       , ref: this.storage.ref(filePath)
     };
+  }
+
+  ngOnInit() {
+    this.profileService
+      .getUserProfile()
+      .get()
+      .then(userProfileSnapshot => {
+        this.userProfile = userProfileSnapshot.data();
+        this.actionUserName = this.userProfile.name;
+      });
   }
 
 }

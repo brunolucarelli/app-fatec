@@ -14,20 +14,23 @@ export class FirestoreService {
   createAction(
     actionTitle: string,
     actionDescription: string,
-    actionImage: string
+    actionImage: string,
+    actionUserID: string,
+    actionUserName: string
   ): Promise<void> {
-
     const id = this.firestore.createId();
 
     return this.firestore.doc(`actionList/${id}`).set({
       id,
       actionTitle,
       actionDescription,
-      actionImage
+      actionImage,
+      actionUserID,
+      actionUserName
     });
-   }
+  }
 
-   getActionList(): AngularFirestoreCollection<Action> {
+  getActionList(): AngularFirestoreCollection<Action> {
     return this.firestore.collection('actionList');
   }
 

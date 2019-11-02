@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button text="Voltar" defaultHref="/tabs/destaques"></ion-back-button>
+        </ion-buttons>
+    <ion-title>{{ (perfil | async)?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>{{ (perfil | async)?.email }}</p>
+  <p>{{ (perfil | async)?.id }}</p>
+</ion-content>
