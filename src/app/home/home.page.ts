@@ -24,7 +24,6 @@ export class HomePage implements OnInit {
       if (user) {
         this.id = user.uid;
         console.log('User is signed in');
-        //console.log(this.id);
       }
       else {
         console.log('User is NOT signed in');

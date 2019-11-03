@@ -3,22 +3,22 @@
     <ion-buttons slot="start">
       <ion-back-button text="Voltar" defaultHref="/tabs/opcoes"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ (action | async)?.actionTitle }}</ion-title>
+    <ion-title>{{ (actionDetails | async)?.actionTitle }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <h3>Descrição</h3>
-  <p>{{ (action | async)?.actionDescription }}</p>
-  <ion-img src="{{ (action | async)?.actionImage }}"></ion-img>
+  <p>{{ (actionDetails | async)?.actionDescription }}</p>
+  <ion-img src="{{ (actionDetails | async)?.actionImage }}"></ion-img>
 
-  <ion-card routerLink="/perfil/{{ (action | async)?.actionUserID }}">
+  <ion-card routerLink="/perfil/{{ (actionDetails | async)?.actionUserID }}">
     <ion-card-header>
-        {{ (action | async)?.actionUserName }}
+        {{ (actionDetails | async)?.actionUserName }}
     </ion-card-header>
   </ion-card>
 
-  <ion-button expand="block" (click)="participate()">
+  <ion-button expand="block" (click)="openParticiparModal()">
     Participar
   </ion-button>
 

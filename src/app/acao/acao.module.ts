@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { AcaoPage } from './acao.page';
 
+import { ParticiparModalComponentModule } from 'src/app/participar-modal/participar-modal.component.module'
+
 const routes: Routes = [
   {
     path: '',
@@ -16,11 +18,14 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    ParticiparModalComponentModule,
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
-  declarations: [AcaoPage]
+  declarations: [
+    AcaoPage
+  ]
 })
 export class AcaoPageModule {}

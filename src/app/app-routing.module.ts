@@ -21,7 +21,6 @@ const routes: Routes = [
   { path: 'sobre', loadChildren: './opcoes/sobre/sobre.module#SobrePageModule', canActivate: [AuthGuard] },
   { path: 'resetarsenha', loadChildren: './resetarsenha/resetarsenha.module#ResetarsenhaPageModule' },
   { path: 'perfil/:id', loadChildren: './perfil/perfil.module#PerfilPageModule' },
-
 ];
 @NgModule({
   imports: [

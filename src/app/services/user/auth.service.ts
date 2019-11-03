@@ -8,6 +8,8 @@ import 'firebase/firestore';
 })
 export class AuthService {
 
+  id: any;
+
   constructor() { }
 
   loginUser(
@@ -17,16 +19,15 @@ export class AuthService {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
-  signupUser(email: string, password: string, name:string, id:string): Promise<any> {
+  signupUser(email: string, password: string, name:string): Promise<any> {
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((newUserCredential: firebase.auth.UserCredential) => {
-        id = newUserCredential.user.uid;
         firebase
           .firestore()
           .doc(`/userProfile/${newUserCredential.user.uid}`)
-          .set({ id, email, name });
+          .set({ email, name });
       })
       .catch(error => {
         console.error(error);
