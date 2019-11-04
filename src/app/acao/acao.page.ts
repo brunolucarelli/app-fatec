@@ -5,7 +5,9 @@ import { FirestoreService } from 'src/app/services/data/firestore.service';
 import { Observable } from 'rxjs';
 
 import { ModalController } from '@ionic/angular';
-import { ParticiparModalComponent } from 'src/app/participar-modal/participar-modal.component'
+import { ParticiparModalComponent } from 'src/app/participar-modal/participar-modal.component';
+
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-acao',
@@ -28,9 +30,14 @@ export class AcaoPage implements OnInit {
   ) { }
 
   async openParticiparModal() {
+
     const modal = await this.modalCtrl.create({
-      component: ParticiparModalComponent
-    })
+      component: ParticiparModalComponent,
+      componentProps: {
+        "currentUserId": this.currentUserId,
+        "actionId": this.actionId
+      }
+    });
     return await modal.present();
   }
 
@@ -38,5 +45,12 @@ export class AcaoPage implements OnInit {
     const actionIdParam: string = this.route.snapshot.paramMap.get('id');
     this.actionDetails = this.firestoreService.getActionDetail(actionIdParam).valueChanges();
     this.actionId = actionIdParam;
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.currentUserId = user.uid;
+        console.log(this.currentUserId);
+      }
+    })
   }
 }

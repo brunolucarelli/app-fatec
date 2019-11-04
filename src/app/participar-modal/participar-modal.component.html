@@ -1,3 +1,18 @@
-<p>
-  participar-modal works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-button text="Voltar" (click)="closeModal()"></ion-button>
+    <ion-title>Participar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-button expand="block" class="submit-btn" (click)="participationAsVisitant()" type="submit">
+    Visitante
+  </ion-button>
+
+  <ion-button expand="block" class="submit-btn" (click)="participationAsVolunteer()" type="submit">
+    Voluntário    
+  </ion-button>
+
+</ion-content>

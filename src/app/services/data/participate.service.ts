@@ -27,6 +27,10 @@ export class ParticipateService {
     });
   }
 
+  updateParticipation(participationType: string, id: any): Promise<any> {
+    return this.firestore.doc(`participationList/${id}`).update({ participationType });
+  }
+
   getParticipationList(): AngularFirestoreCollection<Participacao> {
     return this.firestore.collection('participationList');
   }
