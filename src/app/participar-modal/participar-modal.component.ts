@@ -4,6 +4,7 @@ import { ParticipateService } from 'src/app/services/data/participate.service';
 import * as firebase from 'firebase/app';
 import { AlertController } from '@ionic/angular';
 import { snapshotChanges } from 'angularfire2/database';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-participar-modal',
@@ -25,65 +26,55 @@ export class ParticiparModalComponent implements OnInit {
   ) { }
 
   participationAsVisitant() {
-    var type: any;
-    var participationId: any;
 
     var db = firebase.firestore();
-
-    const participationList = db.collection('participationList')
-      .where("userId", "==", this.currentUserId);
-
-    participationList.get().then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        participationId = doc.id;
-        type = doc.data();
-      })
-    })
-
-    participationList.get().then((snapshotChanges) => {
-      if (snapshotChanges.empty) {
-        this.presentAlertNew("Confirma a sua participação como visitante?", "Visitante");
-      } else {
-        if (type.participationType == "Voluntário") {
-          this.presentAlertExist("Você já se inscreveu como voluntário, deseja trocar para visitante?", participationId, "Visitante");
-        } else if (type.participationType == "Visitante") {
-          this.presentAlertExist("Você já se inscreveu como visitante, deseja trocar para voluntário?", participationId, "Voluntário");
+    var query = db.collection('participationList')
+      .where("userId", "==", this.currentUserId)
+      .where("actionId", "==", this.actionId)
+      .get()
+      .then((snapshotChanges) => {
+        if (snapshotChanges.empty) {
+          this.presentAlertNew("Confirma a sua participação como visitante?", "Visitante");
         } else {
-          this.presentAlert("Erro desconhecido");
+          snapshotChanges.forEach((docs) => {
+            if (docs.data().actionId == this.actionId) {
+              if (docs.data().participationType == "Voluntário") {
+                this.presentAlertExist("Você já se inscreveu como voluntário, deseja trocar para visitante?", docs.id, "Visitante");
+              } else if (docs.data().participationType == "Visitante") {
+                this.presentAlertExist("Você já se inscreveu como visitante, deseja trocar para voluntário?", docs.id, "Voluntário");
+              }
+            } else {
+              this.presentAlert("Erro")
+            }
+          })
         }
-      }
-    })
+      })
   }
 
   participationAsVolunteer() {
-    var type: any;
-    var participationId: any;
 
     var db = firebase.firestore();
-
-    const participationList = db.collection('participationList')
-      .where("userId", "==", this.currentUserId);
-
-    participationList.get().then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        participationId = doc.id;
-        type = doc.data();
-      })
-    })
-
-    participationList.get().then((snapshotChanges) => {
-      if (snapshotChanges.empty) {
-        this.presentAlertNew("Confirma a sua participação como voluntário?", "Voluntário");
-      } else {
-        if (type.participationType == "Voluntário") {
-          this.presentAlertExist("Você já se inscreveu como voluntário, deseja trocar para visitante?", participationId, "Visitante");
-        } else if (type.participationType == "Visitante") {
-          this.presentAlertExist("Você já se inscreveu como visitante, deseja trocar para voluntário?", participationId, "Voluntário");
+    var query = db.collection('participationList')
+      .where("userId", "==", this.currentUserId)
+      .where("actionId", "==", this.actionId)
+      .get()
+      .then((snapshotChanges) => {
+        if (snapshotChanges.empty) {
+          this.presentAlertNew("Confirma a sua participação como Voluntário?", "Voluntário");
         } else {
-          this.presentAlert("Erro desconhecido");
+          snapshotChanges.forEach((docs) => {
+            if (docs.data().actionId == this.actionId) {
+              if (docs.data().participationType == "Voluntário") {
+                this.presentAlertExist("Você já se inscreveu como voluntário, deseja trocar para visitante?", docs.id, "Visitante");
+              } else if (docs.data().participationType == "Visitante") {
+                this.presentAlertExist("Você já se inscreveu como visitante, deseja trocar para voluntário?", docs.id, "Voluntário");
+              }
+            } else {
+              this.presentAlert("Erro")
+            }
+          })
         }
-      }
-    })
+      })
   }
 
   async closeModal() {
@@ -136,7 +127,7 @@ export class ParticiparModalComponent implements OnInit {
     console.table(this.navParams);
     this.currentUserId = this.navParams.data.currentUserId;
     this.actionId = this.navParams.data.actionId;
-    console.log(this.currentUserId, this.actionId);
+    //console.log(this.currentUserId, this.actionId);
   }
 
 }

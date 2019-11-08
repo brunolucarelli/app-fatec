@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 import { Participacao } from 'src/app/models/participacao.interface';
+import * as firebase from 'firebase/app';
 
 import 'firebase/storage';
 
@@ -38,4 +39,5 @@ export class ParticipateService {
   getParticipationDetails(participationId: string): AngularFirestoreDocument<Participacao> {
     return this.firestore.collection('participationList').doc(participationId);
   }
+
 }

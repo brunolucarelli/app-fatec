@@ -4,46 +4,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-    <ion-list>
-      <ion-list-header>
-        Suas próximas ações
-      </ion-list-header>
-        <ion-item>
-          <ion-label>Ação 1</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Ação 2</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Ação 3</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Ação 4</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Ação 5</ion-label>
-        </ion-item>
-      </ion-list>
+<ion-content>
 
-      <ion-list>
-          <ion-list-header>
-            Suas ações anteriores
-          </ion-list-header>
-          <ion-item>
-              <ion-label>Ação 1</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>Ação 2</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>Ação 3</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>Ação 4</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>Ação 5</ion-label>
-            </ion-item>
-          </ion-list>
+  <ion-list>
+
+    <ion-list-header>
+      Suas próximas ações
+    </ion-list-header>
+
+    <div *ngFor='let list of list'>
+      {{ list.actionId }}
+    </div>
+
+  </ion-list>
+
 </ion-content>
