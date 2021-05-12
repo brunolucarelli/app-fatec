@@ -42,7 +42,7 @@
     "ionic-native": "^2.9.0",
     "npm-upgrade": "^2.0.2",
     "rxjs": "^6.5.3",
-    "swiper": "^5.1.0",
+    "swiper": "^6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
